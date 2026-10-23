@@ -12,13 +12,14 @@
 Pick a property you wrote that passes on the correct implementation but
 kills few or no mutants. Why is it still a *valid* property? Describe a
 concrete bug (not one of our mutants) that it *would* catch.
-
+The property “returns exactly five colors”  killed none of the public mutants, since they still return five colors. It would catch a bug where the loop skips the last position and returns only four colors.
 
 ### 2. A generator problem, not a property problem
 
 Describe a mutant, from either task, that survived or was flaky because of
 your **generator** rather than your property. What did the generator fail to
 produce? How did you fix it? Paste the runner output from before and after.
+
 
 ### 3. Reading a counterexample
 
