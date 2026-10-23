@@ -12,6 +12,7 @@
 Pick a property you wrote that passes on the correct implementation but
 kills few or no mutants. Why is it still a *valid* property? Describe a
 concrete bug (not one of our mutants) that it *would* catch.
+
 The property “returns exactly five colors”  killed none of the public mutants, since they still return five colors. It would catch a bug where the loop skips the last position and returns only four colors.
 
 ### 2. A generator problem, not a property problem
@@ -19,6 +20,13 @@ The property “returns exactly five colors”  killed none of the public mutant
 Describe a mutant, from either task, that survived or was flaky because of
 your **generator** rather than your property. What did the generator fail to
 produce? How did you fix it? Paste the runner output from before and after.
+singlePass was flaky because independently generated full-alphabet words did not consistently contain repeated guesses competing with a later green. The existing count property could detect over-crediting, but its generator rarely reached that situation. I added a targeted generator that constructs three distinct letters into secret/guess pairs guaranteeing that competition, together with a direct check of the required colors.
+
+Before: 
+<img width="1047" height="44" alt="image" src="https://github.com/user-attachments/assets/b7db713f-3596-4a4d-b9d5-3fe7995404ac" />
+
+After: <img width="680" height="95" alt="image" src="https://github.com/user-attachments/assets/17b0f712-347d-415c-92de-14585b6e0c96" />
+
 
 
 ### 3. Reading a counterexample
