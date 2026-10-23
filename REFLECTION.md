@@ -1,8 +1,9 @@
 # Reflection
 
-**Name / Andrew ID:**
+**Rita Xiao / ritax:**
 
-**Recitation group members (Task 2):**
+**Recitation group members (Task 2): Matthew Darin**
+
 
 ---
 
@@ -11,6 +12,7 @@
 Pick a property you wrote that passes on the correct implementation but
 kills few or no mutants. Why is it still a *valid* property? Describe a
 concrete bug (not one of our mutants) that it *would* catch.
+
 
 ### 2. A generator problem, not a property problem
 

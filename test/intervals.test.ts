@@ -90,7 +90,7 @@ describe('mergeIntervals', () => {
     );
   });
 
-  // Pattern: differential. The output is the same as a reference implementation.
+  // Pattern: differential. Input and output cover the same points.
   it('preserves point coverage', () => {
     fc.assert(
       fc.property(

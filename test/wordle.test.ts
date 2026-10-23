@@ -43,6 +43,18 @@ describe('matchGuess', () => {
       }),
     );
   });
+  // Pattern: metamorphic. Renaming letters consistently preserves the colors.
+  it('renaming letters gives the same colors', () => {
+    const rename = (w: string) =>
+      [...w].map(c => ALPHABET[25 - ALPHABET.indexOf(c)]).join('');
+
+    fc.assert(
+      fc.property(word, word, (secret, guess) => {
+        expect(matchGuess(rename(secret), rename(guess)))
+          .toEqual(matchGuess(secret, guess));
+      }),
+    );
+  });
   // Pattern: invariant. A letter is never credited more often than it occurs in the secret.
   it('never credits a letter more times than the secret contains it', () => {
     fc.assert(
@@ -56,4 +68,21 @@ describe('matchGuess', () => {
       }), 
     );
   });
+
+  // Pattern: conditional. Greens reserve their occurrences before remaining letters receive yellows.
+  it('reserves greens before assigning yellows', () => {
+    const cases = fc.shuffledSubarray([...ALPHABET], { minLength: 3, maxLength: 3 })
+      .map(([a, b, c]) => ({
+        secret: b + b + b + c + a,
+        guess: a + b + b + b + a,
+      }));
+
+    fc.assert(
+      fc.property(cases, ({ secret, guess }) => {
+        expect(matchGuess(secret, guess))
+          .toEqual(['B', 'G', 'G', 'Y', 'G']);
+      }),
+    );
+  });
+
 });
