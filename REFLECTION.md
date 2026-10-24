@@ -20,6 +20,8 @@ The property “returns exactly five colors”  killed none of the public mutant
 Describe a mutant, from either task, that survived or was flaky because of
 your **generator** rather than your property. What did the generator fail to produce? How did you fix it? Paste the runner output from before and after.
 
+As shown below, singlePass displayed as flaky because independently generated full-alphabet words did not consistently have repeated guesses competing with a later clasified green. The existing count property could detect over-crediting, but its generator has a rarer probability to reach this situation. I added a targeted generator that constructs 3 distinct letters into secret/guess pairs that guarantees this competition, along with a direct check of the required colors.
+
 #Before: 
 <img width="792" height="52" alt="image" src="https://github.com/user-attachments/assets/7cdd2755-30bf-4312-8237-27f43bba9422" />
 
