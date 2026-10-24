@@ -18,9 +18,8 @@ The property “returns exactly five colors”  killed none of the public mutant
 ### 2. A generator problem, not a property problem
 
 Describe a mutant, from either task, that survived or was flaky because of
-your **generator** rather than your property. What did the generator fail to
-produce? How did you fix it? Paste the runner output from before and after.
-singlePass was flaky because independently generated full-alphabet words did not consistently contain repeated guesses competing with a later green. The existing count property could detect over-crediting, but its generator rarely reached that situation. I added a targeted generator that constructs three distinct letters into secret/guess pairs guaranteeing that competition, together with a direct check of the required colors.
+your **generator** rather than your property. What did the generator fail to produce? How did you fix it? Paste the runner output from before and after.
+
 #Before: 
 <img width="792" height="52" alt="image" src="https://github.com/user-attachments/assets/7cdd2755-30bf-4312-8237-27f43bba9422" />
 
@@ -32,7 +31,7 @@ Paste one counterexample that the mutation runner printed for a killed
 mutant. In 2–3 sentences, explain using the *specification* why that input
 exposes the bug.
 <img width="766" height="49" alt="image" src="https://github.com/user-attachments/assets/8c663cf3-d2ce-4229-b6c9-12dc3c32a8ff" />
-
+This counterexample shows that the mutant incorrectly handles the repeated letters within Wordle. According to the specification, green matches should be assigned first, then the remaining letters should be checked for yellow matches. 
 ### 4. Your project
 
 Name one function or module in your team's project that would benefit from
@@ -40,3 +39,4 @@ property-based testing. State two properties in English, name the pattern of
 each, and describe the generator you'd need, including anything about its
 inputs that a naive generator would get wrong.
 
+    One module in our team’s project that could benefit from property-based testing is the learnMode comprehension answer evaluation feature. The first property (Invariant) is that correct responses to the comprehension question should allow the code edit to proceed, while incorrect answers should not allow the edit process to continue and trigger the generation of another question. The second property (Metamorphic) is that changing the capitalization or adding extra whitespace to a correct response should not change whether it is considered as correct. To test these properties, I would generate comprehension questions with expected answers and differing user responses, (including correct, incorrect, and partially correct answers). A naive generator may only produce random strings that are unrelevant to the questions, so I would need to make sure the generated responses are realistic and relevant.
